@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="dXp-qk-JDl">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="A81-zQ-Ln6">
+            <objects>
+                <customObject id="Opt-fr-hdi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <windowController id="dXp-qk-JDl" customClass="windowCntr" sceneMemberID="viewController">
+                    <window key="window" title="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="bvP-dY-E7L">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <connections>
+                            <outlet property="delegate" destination="dXp-qk-JDl" id="HtN-ma-gMv"/>
+                        </connections>
+                    </window>
+                </windowController>
+            </objects>
+            <point key="canvasLocation" x="35" y="-30"/>
+        </scene>
+    </scenes>
+</document>
