@@ -28,7 +28,14 @@
     NSString *safariWindowId = [[NSString alloc] initWithData:[file readDataToEndOfFile] encoding:NSUTF8StringEncoding];
     NSLog (@"safariWindowId: %@", safariWindowId);
     
-    OSXAppHidhtlightDeledate *test = [[OSXAppHidhtlightDeledate alloc]initWithWindowId:[safariWindowId intValue]];
+    // test highlighting Safari
+    OSXAppHidhtlightDeledate *test = [[OSXAppHidhtlightDeledate alloc]initWithParams:NO windowOrScreenId:[safariWindowId doubleValue]];
+    
+    // test highlighting main screen
+    NSDictionary *screenDescription = [[NSScreen mainScreen] deviceDescription];
+    double screenId =[[screenDescription objectForKey:@"NSScreenNumber"] doubleValue];
+//    OSXAppHidhtlightDeledate *test = [[OSXAppHidhtlightDeledate alloc]initWithParams:YES windowOrScreenId:screenId];
+    
     [test show];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

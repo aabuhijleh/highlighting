@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
     
 }
 
-- (OSXAppHidhtlightDeledate*) initWithWindowId:(long) windowId;
+- (OSXAppHidhtlightDeledate*) initWithParams:(bool)isSharingFullScreen windowOrScreenId:(double)windowOrScreenId;
 - (void) hide;
 - (void) show;
 - (void) end;

@@ -19,13 +19,21 @@ static AXUIElementRef axApplication;
   OverlayWindow *trackingWin;
 }
 
-- (OSXAppHidhtlightDeledate *)initWithWindowId:(long)windowId {
+- (OSXAppHidhtlightDeledate *)initWithParams:(bool)isSharingFullScreen
+                            windowOrScreenId:(double)windowOrScreenId {
   NSLog(@"IN AppHidhtlightDeledate : init");
   self = [super init];
   if (!self)
     return nil;
 
-  NSLog(@"AppHidhtlightDeledate : initWithWindowId");
+  NSLog(@"AppHidhtlightDeledate : initWithParams : isSharingFullScreen:[%d] : "
+        @"windowOrScreenId:[%lf]",
+        isSharingFullScreen, windowOrScreenId);
+
+  if (isSharingFullScreen) {
+    [self highlightFullScreen:windowOrScreenId];
+    return self;
+  }
 
   NSDictionary *options = @{(__bridge id)kAXTrustedCheckOptionPrompt : @YES};
   BOOL accessibilityEnabled =
@@ -35,12 +43,12 @@ static AXUIElementRef axApplication;
     NSLog(@"AppHidhtlightDeledate : initWithWindowId : accessibility not "
           @"enabled!");
   }
-  trackedWindowId = windowId;
-  NSLog(@"AppHidhtlightDeledate : Selected windows ID =%ld", windowId);
+  trackedWindowId = (long)windowOrScreenId;
+  NSLog(@"AppHidhtlightDeledate : Selected windows ID =%ld", trackedWindowId);
 
   AXUIElementRef axUielementWindow;
   @try {
-    trackedAppPid = [self processIdWithWindowId:windowId];
+    trackedAppPid = [self processIdWithWindowId:trackedWindowId];
     [self windowWithProcessId:trackedAppPid window:&axUielementWindow];
     [self attachNotifications:trackedAppPid];
   } @catch (NSException *e) {
@@ -60,22 +68,6 @@ static AXUIElementRef axApplication;
     [distr_center removeObserver:self];
   }
   NSLog(@"OUT AppHidhtlightDeledate : dealloc");
-}
-
-- (void)activeSpaceDidChange:(NSNotification *)notification {
-  @try {
-    CGRect rect = [self selectedAppCoordinates:trackedWindowId];
-
-    if ((rect.origin.x == 0) && (rect.origin.y == 0)) {
-      NSLog(@"OSXAppHidhtlightDeledate::activeSpaceDidChange : FULL SCREEN !");
-    }
-
-    NSLog(@"OSXAppHidhtlightDeledate::activeSpaceDidChange : shared "
-          @"application size x[%f],y[%f],w[%f],h[%f]",
-          rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-  } @catch (NSException *e) {
-    NSLog(@"ERROR :OSXAppHidhtlightDeledate::activeSpaceDidChange : %@", e);
-  }
 }
 
 - (void)show {
@@ -181,14 +173,6 @@ static AXUIElementRef axApplication;
                           defer:NO];
         [trackingWin setIgnoresMouseEvents:true];
         [trackingWin orderWindow:NSWindowBelow relativeTo:0];
-
-        //        BOOL fullScreen = true;
-        //              if (fullScreen) {
-        //                  [underlayWnd setLevel:NSMainMenuWindowLevel];
-        //                  CGRect screenRect = CGRectMake(0, 0,
-        //                  screenSize.width, screenSize.height); [underlayWnd
-        //                  setFrame:screenRect display:YES];
-        //              }
       }
 
       [self show];
@@ -328,6 +312,36 @@ void updateCallback(AXObserverRef observer, AXUIElementRef element,
                        kCFRunLoopDefaultMode);
   }
   NSLog(@"OUT AppHidhtlightDeledate : attachNotifications");
+}
+
+- (void)highlightFullScreen:(double)trackedScreenId {
+  NSArray *screenArray = [NSScreen screens];
+
+  for (NSScreen *screen in screenArray) {
+    NSDictionary *screenDescription = [screen deviceDescription];
+    double screenId =
+        [[screenDescription objectForKey:@"NSScreenNumber"] doubleValue];
+    if (screenId == trackedScreenId) {
+      NSLog(@"create full screen tracking window");
+      NSRect frameR =
+          NSMakeRect(screen.frame.origin.x, screen.frame.origin.y,
+                     screen.frame.size.width, screen.frame.size.height);
+
+      trackingWin =
+          [[OverlayWindow alloc] initWithContentRect:frameR
+                                           styleMask:NSWindowStyleMaskBorderless
+                                             backing:NSBackingStoreBuffered
+                                               defer:NO];
+      [trackingWin setIgnoresMouseEvents:true];
+      [trackingWin orderWindow:NSWindowBelow relativeTo:0];
+      [trackingWin setLevel:NSMainMenuWindowLevel];
+      [trackingWin
+          setCollectionBehavior:NSWindowCollectionBehaviorStationary |
+                                NSWindowCollectionBehaviorCanJoinAllSpaces |
+                                NSWindowCollectionBehaviorFullScreenAuxiliary];
+      break;
+    }
+  }
 }
 
 @end
