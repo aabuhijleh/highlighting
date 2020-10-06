@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		11C00C13251E42B4007EB1BD /* OverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C00C0F251E42B4007EB1BD /* OverlayWindow.m */; };
-		7180F24B24FCFB5300158D58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7180F24A24FCFB5300158D58 /* AppDelegate.m */; };
 		7180F25024FCFB5400158D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7180F24F24FCFB5400158D58 /* Assets.xcassets */; };
 		7180F25324FCFB5400158D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7180F25124FCFB5400158D58 /* Main.storyboard */; };
 		7180F25624FCFB5400158D58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7180F25524FCFB5400158D58 /* main.m */; };
@@ -39,8 +38,6 @@
 		11C00C0F251E42B4007EB1BD /* OverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayWindow.m; sourceTree = "<group>"; };
 		11C00C10251E42B4007EB1BD /* OverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayWindow.h; sourceTree = "<group>"; };
 		7180F24624FCFB5300158D58 /* highliting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = highliting.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7180F24924FCFB5300158D58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7180F24A24FCFB5300158D58 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7180F24F24FCFB5400158D58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7180F25224FCFB5400158D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7180F25424FCFB5400158D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,8 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				11C00C0E251E4298007EB1BD /* OverlayWindow */,
-				7180F24924FCFB5300158D58 /* AppDelegate.h */,
-				7180F24A24FCFB5300158D58 /* AppDelegate.m */,
 				7180F24F24FCFB5400158D58 /* Assets.xcassets */,
 				7180F25124FCFB5400158D58 /* Main.storyboard */,
 				7180F25424FCFB5400158D58 /* Info.plist */,
@@ -281,7 +276,6 @@
 				7180F25624FCFB5400158D58 /* main.m in Sources */,
 				7180F28024FCFBE000158D58 /* windowCntr.m in Sources */,
 				11C00C13251E42B4007EB1BD /* OverlayWindow.m in Sources */,
-				7180F24B24FCFB5300158D58 /* AppDelegate.m in Sources */,
 				7180F2A424FE369C00158D58 /* OSXAppHidhtlightDeledate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

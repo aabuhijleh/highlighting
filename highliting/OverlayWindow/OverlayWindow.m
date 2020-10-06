@@ -11,7 +11,7 @@
         [self setOpaque:NO]; // Needed so we can see through it when we have clear stuff on top
         [self setHasShadow:YES];
         [self setLevel: NSNormalWindowLevel];
-        [self setCollectionBehavior:NSWindowCollectionBehaviorStationary|NSWindowCollectionBehaviorCanJoinAllSpaces|NSWindowCollectionBehaviorFullScreenAuxiliary];
+        [self setCollectionBehavior:NSWindowCollectionBehaviorStationary|NSWindowCollectionBehaviorTransient|NSWindowCollectionBehaviorCanJoinAllSpaces|NSWindowCollectionBehaviorFullScreenAuxiliary];
         
     }
     
@@ -29,8 +29,8 @@
     self.backgroundColor = [NSColor clearColor];
     self.contentView.wantsLayer = YES;
     self.contentView.layer.backgroundColor = [[NSColor clearColor] CGColor];
-    self.contentView.layer.borderWidth = 2;
-    self.contentView.layer.borderColor = [[NSColor redColor] CGColor];
+    self.contentView.layer.borderWidth = 3;
+    self.contentView.layer.borderColor = [[NSColor systemPinkColor] CGColor];
     self.contentView.layer.cornerRadius = 5;
 }
 
